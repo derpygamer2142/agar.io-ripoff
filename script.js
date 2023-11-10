@@ -1,14 +1,7 @@
 import Game from "./game.js";
 
-/* 
-git add .
-git commit -m "commit message"
-git branch -M main
-git push -u origin main
-
-
-download github desktop app
-this is yet another test
+/*
+wow such an amazing test
 */
 
 const canv = document.querySelector("canvas");
