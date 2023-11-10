@@ -5,7 +5,7 @@ export default class BlobManager {
     }
 
     compareBlobs(blob1, blob2) {
-        if (this.collisions.circleCircle(blob1,blob2)) {
+        if (this.game.collisions.circleCircle(blob1,blob2)) {
             if (blob1.r > blob2.r) {
                 blob1.r += blob2.r;
                 blob2.deleted = true;
@@ -13,8 +13,10 @@ export default class BlobManager {
             else if (blob2.r > blob1.r) {
                 blob2.r += blob1.r;
                 blob1.deleted = true;
+                
             }
         }
+
     }
 
     checkForBlobCollisions() {
@@ -23,14 +25,14 @@ export default class BlobManager {
 
             this.game.blobs.forEach(b2 => {
                 if (!b1 == b2) {
-                    this.compareBlobs(b1,b2);
+                    compareBlobs(b1,b2);
                     this.game.blobs.filter(b => !b.deleted) // not sure if js will update the foreach loop, hopefully this isn't a problem
                 }
             });
 
             this.game.foodBlobs.forEach(b2 => {
                 if (!b1 == b2) {
-                    this.compareBlobs(b1,b2);
+                    compareBlobs(b1,b2);
                     this.game.foodBlobs.filter(b => !b.deleted) // efficiency :sunglasses:
                 }
             });

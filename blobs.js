@@ -5,12 +5,12 @@ export default class Blob {
         this.collisions = this.game.collisions;
         this.utils = this.game.utils;
 
-        this.x = (Math.random() - 0.5) * 40000;
-        this.y = (Math.random() - 0.5) * 40000;
+        this.x = (Math.random() - 0.5) * 3000;
+        this.y = (Math.random() - 0.5) * 3000;
         this.r = 25 + (Math.random() * 15);
 
-        this.targetX = this.x + ((Math.random()-0.5) * 2000);
-        this.targetY = this.y + ((Math.random()-0.5) * 2000);
+        this.targetX = 0//this.x + ((Math.random()-0.5) * 2000);
+        this.targetY = 0//this.y + ((Math.random()-0.5) * 2000);
 
         this.color = "red";
         this.ai = ai;
@@ -54,7 +54,7 @@ export default class Blob {
 
                 case "wander":
                     this.color = "purple"
-                    if (Math.round(Math.random() * 15)) {
+                    if (Math.round(Math.random() * 15) == 1) {
                         this.direction += (Math.random()-0.5)*5;
                     }
 
@@ -95,19 +95,54 @@ export default class Blob {
                     break;
 
             
-            }
+                }
 
-            let rand = Math.round(this.utils.random(0,1000))
-            if (rand == 1) {
-                this.ai = this.utils.randItem(this.game.aiStates);
-            }
+                let rand = Math.round(this.utils.random(0,1000))
+                if (rand == 1) {
+                    this.ai = this.utils.randItem(this.game.aiStates);
+                }
 
-            
-            if (this.collisions.circleCircle(this.game.player,this)) {
-                this.color = "green" // this should not work, yet it does.
-            }
-            
+                this.game.blobManager.compareBlobs(this,this.game.player);
+                
+                
+                /*
+                let collisionChecks = this.game.blobs;
+                collisionChecks = collisionChecks.concat(this.game.foodBlobs);
 
+                collisionChecks = collisionChecks.filter(b => b.r + this.r < this.game.utils.dist(this.x,this.y,b.x,b.y))
+                collisionChecks.forEach(b => {
+                    if (this.collisions.circleCircle(this,b)) {
+                        if (this.r > b.r) {
+                            b.deleted = true;
+                        }
+                        else {
+                            this.deleted = true;
+                        }
+                    }
+                });
+                */
+
+                
+                let testDist = this.game.utils.dist(this.x,this.y,this.game.player.x,this.game.player.y);
+
+                if (testDist <= 5000) {
+                    this.game.blobs.forEach(b2 => {
+                        if (!this.delted && !b2 == this) {
+                            this.game.blobManager.compareBlobs(this,b2);
+                            
+                            
+                        }
+                    });
+
+                    if (!this.deleted) {
+                        this.game.foodBlobs.forEach(b2 => {
+                            if (!this.delted) {
+                                this.game.blobManager.compareBlobs(this,b2);
+                            }
+                        });
+                    }
+                }
+                
 
         }
     }
@@ -116,8 +151,8 @@ export default class Blob {
         if (!this.deleted) {
             ctx.fillStyle = this.color;
             ctx.beginPath();
-            let calcX = this.game.camX - this.x
-            let calcY = this.game.camY - this.y
+            let calcX = this.game.camX - this.x;
+            let calcY = this.game.camY - this.y;
             ctx.arc(calcX, calcY, this.r, 0, Math.PI * 2, false);
             ctx.fill();
             ctx.fillStyle = "black";
@@ -125,6 +160,6 @@ export default class Blob {
             ctx.fillText(this.ai,calcX,calcY)
         }
 
-        
+
     }
 }

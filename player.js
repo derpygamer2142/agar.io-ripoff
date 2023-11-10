@@ -4,7 +4,7 @@ export default class Player {
         this.x = 0;
         this.y = 0;
 
-        this.r = 25;
+        this.r = 55;
 
         this.input = this.game.input
 

@@ -32,11 +32,11 @@ export default class Game {
         this.blobs = [];
         this.foodBlobs = [];
 
-        for (let i = 0; i < 2500; i ++) {
+        for (let i = 0; i < 100; i ++) {
             this.blobs.push(new Blob(this,this.utils.randItem(this.aiStates))); // 
         }
 
-        for (let i = 0; i < 3500; i ++) {
+        for (let i = 0; i < 300; i ++) {
             this.foodBlobs.push(new Food(this));
         }
         
@@ -58,8 +58,8 @@ export default class Game {
         });
 
         // this.blobManager.checkForBlobCollisions();
-        this.blobs.filter(b => !b.deleted);
-        this.foodBlobs.filter(b => !b.deleted);
+        this.blobs = this.blobs.filter(b => !b.deleted);
+        this.foodBlobs = this.foodBlobs.filter(b => !b.deleted);
     }
 
     draw(ctx) {
