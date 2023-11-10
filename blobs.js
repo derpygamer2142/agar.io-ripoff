@@ -125,9 +125,9 @@ export default class Blob {
                 
                 let testDist = this.game.utils.dist(this.x,this.y,this.game.player.x,this.game.player.y);
 
-                if (testDist <= 5000) {
+                if (testDist <= 2000) {
                     this.game.blobs.forEach(b2 => {
-                        if (!this.delted && !b2 == this) {
+                        if (!this.deleted && !b2 == this) {
                             this.game.blobManager.compareBlobs(this,b2);
                             
                             
@@ -136,7 +136,7 @@ export default class Blob {
 
                     if (!this.deleted) {
                         this.game.foodBlobs.forEach(b2 => {
-                            if (!this.delted) {
+                            if (!this.deleted) {
                                 this.game.blobManager.compareBlobs(this,b2);
                             }
                         });

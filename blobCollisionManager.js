@@ -15,6 +15,10 @@ export default class BlobManager {
                 blob1.deleted = true;
                 
             }
+            else {
+                blob1.deleted = true
+                blob2.deleted = true
+            }
         }
 
     }
