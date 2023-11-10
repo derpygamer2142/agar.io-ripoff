@@ -10,13 +10,14 @@ export default class Food {
         let r = Math.random() * 255;
         let g = Math.random() * 255;
         let b = Math.random() * 255;
-        this.color = `rgb(${r},${g},${b})`
+        this.color = `rgb(${r},${g},${b})`;
+
+
+        this.deleted = false;
     }
 
     update() {
-        if (this.collisions.circleCircle(this.game.player,this)) {
-            this.color = "green"
-        }
+        
     }
 
     draw(ctx) {

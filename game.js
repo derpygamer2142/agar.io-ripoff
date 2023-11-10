@@ -5,6 +5,7 @@ import Blob from "./blobs.js";
 import Collisions from "./collisions.js";
 import Utils from "./utilsnstuff.js";
 import Food from "./food.js";
+import BlobManager from "./blobCollisionManager.js";
 
 export default class Game {
     constructor(WIDTH, HEIGHT) {
@@ -16,6 +17,8 @@ export default class Game {
 
         this.collisions = new Collisions();
         this.utils = new Utils();
+
+        this.blobManager = new BlobManager(this);
 
         this.grid = new Grid(this);
         this.input = new Input(this);
@@ -53,6 +56,10 @@ export default class Game {
         this.foodBlobs.forEach(f => {
             f.update()
         });
+
+        // this.blobManager.checkForBlobCollisions();
+        this.blobs.filter(b => !b.deleted);
+        this.foodBlobs.filter(b => !b.deleted);
     }
 
     draw(ctx) {
