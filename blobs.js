@@ -102,7 +102,7 @@ export default class Blob {
                     this.ai = this.utils.randItem(this.game.aiStates);
                 }
 
-                this.game.blobManager.compareBlobs(this,this.game.player);
+                //this.game.blobManager.compareBlobs(this,this.game.player);
                 
                 
                 /*
@@ -127,9 +127,19 @@ export default class Blob {
 
                 if (testDist <= 2000) {
                     this.game.blobs.forEach(b2 => {
-                        if (!this.deleted && !b2 == this) {
-                            this.game.blobManager.compareBlobs(this,b2);
-                            
+                        if (!b2 == this) {
+                            //this.game.blobManager.compareBlobs(this,b2);
+                            if (this.collisions.circleCircle(this,b2)) {
+                                console.log("bonk")
+                                if (this.r > b2.r) {
+                                    this.r += 15
+                                    b2.deleted = true;
+                                }
+                                else {
+                                    b2.r += 15
+                                    this.deleted = true;
+                                }
+                            }
                             
                         }
                     });
