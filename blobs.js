@@ -127,7 +127,8 @@ export default class Blob {
 
                 if (testDist <= 2000) {
                     this.game.blobs.forEach(b2 => {
-                        if (!b2 == this) {
+                        if (!(b2 == this)) {
+                            
                             //this.game.blobManager.compareBlobs(this,b2);
                             if (this.collisions.circleCircle(this,b2)) {
                                 console.log("bonk")
