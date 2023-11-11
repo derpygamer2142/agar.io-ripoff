@@ -2,12 +2,12 @@ this is partially a test, partially a todo list
 
 
 
-- [] add camera zoom
+- [ ] add camera zoom
 
-- [] make food respawn
+- [ ] make food respawn
 
-- [] make ai smarter
+- [ ] make ai smarter
 
-- [] make movement be based on mouse movement
+- [ ] make movement be based on mouse movement
 
-- [] balance movement speed
+- [ ] balance movement speed
