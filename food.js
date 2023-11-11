@@ -3,8 +3,8 @@ export default class Food {
         this.game = game;
         this.collisions = this.game.collisions;
         
-        this.x = (Math.random() - 0.5) * 3000;
-        this.y = (Math.random() - 0.5) * 3000;
+        this.x = (Math.random() - 0.5) * 8000;
+        this.y = (Math.random() - 0.5) * 8000;
         this.r = 5 + (Math.random() * 10);
 
         let r = Math.random() * 255;

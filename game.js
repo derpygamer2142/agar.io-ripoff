@@ -32,11 +32,11 @@ export default class Game {
         this.blobs = [];
         this.foodBlobs = [];
 
-        for (let i = 0; i < 100; i ++) {
+        for (let i = 0; i < 400; i ++) {
             this.blobs.push(new Blob(this,this.utils.randItem(this.aiStates))); // 
         }
 
-        for (let i = 0; i < 300; i ++) {
+        for (let i = 0; i < 3500; i ++) {
             this.foodBlobs.push(new Food(this));
         }
 
@@ -82,5 +82,5 @@ export default class Game {
 
     }
 
-    
+
 }

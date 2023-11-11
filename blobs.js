@@ -5,9 +5,9 @@ export default class Blob {
         this.collisions = this.game.collisions;
         this.utils = this.game.utils;
 
-        this.x = (Math.random() - 0.5) * 3000;
-        this.y = (Math.random() - 0.5) * 3000;
-        this.r = 25 + (Math.random() * 15);
+        this.x = (Math.random() - 0.5) * 8000;
+        this.y = (Math.random() - 0.5) * 8000;
+        this.r = 17.5 + (Math.random() * 65);
 
         this.targetX = this.x + ((Math.random()-0.5) * 2000);
         this.targetY = this.y + ((Math.random()-0.5) * 2000);

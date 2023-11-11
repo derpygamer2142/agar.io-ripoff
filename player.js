@@ -4,7 +4,7 @@ export default class Player {
         this.x = 0;
         this.y = 0;
 
-        this.r = 15.1 + (Math.random() * 10);
+        this.r = 20 + (Math.random() * 10);
 
         this.input = this.game.input
         this.deleted = false;
