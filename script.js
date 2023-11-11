@@ -23,6 +23,9 @@ function runGame() {
         game.update();
         game.draw(ctx);
     }
+    else if (game.gameState == 1) {
+        game = new Game(WIDTH,HEIGHT)
+    }
 }
 
 setInterval(runGame,17);
