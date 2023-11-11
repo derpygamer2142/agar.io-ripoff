@@ -9,14 +9,19 @@ export default class Blob {
         this.y = (Math.random() - 0.5) * 3000;
         this.r = 25 + (Math.random() * 15);
 
-        this.targetX = 0//this.x + ((Math.random()-0.5) * 2000);
-        this.targetY = 0//this.y + ((Math.random()-0.5) * 2000);
+        this.targetX = this.x + ((Math.random()-0.5) * 2000);
+        this.targetY = this.y + ((Math.random()-0.5) * 2000);
 
         this.color = "red";
         this.ai = ai;
         this.direction = Math.random() * 360;
 
         this.deleted = false;
+
+        let v = this.utils.dirToVector(this.direction)
+        this.xv = v.xv;
+        this.yv = v.yv;
+        
     }
 
     update() {
@@ -39,12 +44,14 @@ export default class Blob {
                         let calcX = obj.x - this.x;
                         let calcY = obj.y - this.y;
                         this.direction = (Math.atan2(calcX,calcY) * (180/Math.PI))
-        
-                        this.x += Math.sin(this.direction * (Math.PI / 180))
-                        this.y += Math.cos(this.direction * (Math.PI / 180))
+                        
+                        let v = this.utils.dirToVector(this.direction)
+                        this.xv = v.xv;
+                        this.yv = v.yv;
+
                     }
                     else {
-                        this.ai = this.utils.randItem(this.game.aiStates);
+                        this.randomaAiState();
                         console.log("no blobs")
                         break;
                     }
@@ -58,9 +65,9 @@ export default class Blob {
                         this.direction += (Math.random()-0.5)*5;
                     }
 
-                
-                    this.x += Math.sin(this.direction * (Math.PI / 180))
-                    this.y += Math.cos(this.direction * (Math.PI / 180))
+                    let v = this.utils.dirToVector(this.direction)
+                    this.xv = v.xv;
+                    this.yv = v.yv;
                     break;
                     
                 
@@ -70,8 +77,8 @@ export default class Blob {
                     this.x += Math.sin(this.direction * (Math.PI / 180))
                     this.y += Math.cos(this.direction * (Math.PI / 180))
                     */
-                    if (Math.round(this.utils.random(0,750) == 1)) {
-                        this.ai = this.utils.randItem(this.game.aiStates);
+                    if (Math.round(this.utils.random(0,350) == 1)) {
+                        this.randomaAiState()
                     }
                     
                 break;
@@ -89,20 +96,59 @@ export default class Blob {
                         let calcY = this.targetY - this.y;
                         this.direction = (Math.atan2(calcX,calcY) * (180/Math.PI))
 
-                        this.x += Math.sin(this.direction * (Math.PI / 180)) // maybe i should just use radians this is annoying
-                        this.y += Math.cos(this.direction * (Math.PI / 180))
+                        let v = this.utils.dirToVector(this.direction)
+                        this.xv = v.xv;
+                        this.yv = v.yv;
                     }
                     break;
 
+                
+
+                case "agressive":
+                    this.color = "red"
+                    if (this.game.blobs.length > 0) {
+                        let min = this.utils.dist(this.x,this.y,this.game.player.x,this.game.player.y)
+                        let obj = this.game.player
+
+                        if (obj.r > this.r) {
+                            min = Infinity
+                            obj = null
+                        }
+                        let possibleTargets = this.game.blobs;
+                        possibleTargets = possibleTargets.filter(f => (f.r < this.r))
+                        this.game.blobs.forEach(f => {
+                            if (!(f == this)) {
+                                let dist = this.utils.dist(this.x,this.y,f.x,f.y);
+                                if (dist <= min) {
+                                    min = dist;
+                                    obj = f;
+                                }
+                            }
+                        });
+
+                        let calcX = obj.x - this.x;
+                        let calcY = obj.y - this.y;
+                        this.direction = (Math.atan2(calcX,calcY) * (180/Math.PI))
+        
+                        let v = this.utils.dirToVector(this.direction)
+                        this.xv = v.xv;
+                        this.yv = v.yv;
+
+                    }
+                    else {
+                        this.randomaAiState()
+                        console.log("no blobs")
+                        break;
+                    }
             
                 }
 
                 let rand = Math.round(this.utils.random(0,1000))
                 if (rand == 1) {
-                    this.ai = this.utils.randItem(this.game.aiStates);
+                    this.randomaAiState()
                 }
 
-                //this.game.blobManager.compareBlobs(this,this.game.player);
+                this.game.blobManager.compareBlobs(this,this.game.player);
                 
                 
                 /*
@@ -133,11 +179,11 @@ export default class Blob {
                             if (this.collisions.circleCircle(this,b2)) {
                                 console.log("bonk")
                                 if (this.r > b2.r) {
-                                    this.r += 15
+                                    this.r += b2.r*0.1
                                     b2.deleted = true;
                                 }
                                 else {
-                                    b2.r += 15
+                                    b2.r += b2.r*0.1
                                     this.deleted = true;
                                 }
                             }
@@ -154,7 +200,10 @@ export default class Blob {
                     }
                 }
                 
-
+            
+            
+            this.x += (50/this.r) * this.xv;
+            this.y += (50/this.r) * this.yv;
         }
     }
 
@@ -172,5 +221,17 @@ export default class Blob {
         }
 
 
+    }
+
+    randomaAiState() {
+        this.ai = this.utils.randItem(this.game.aiStates);
+        while (this.ai == "afk") {
+            if (Math.random(this.utils.random(0,15))) {
+                break;
+            }
+            else {
+                this.ai = this.utils.randItem(this.game.aiStates);
+            }
+        }
     }
 }

@@ -10,4 +10,11 @@ export default class Utils {
     randItem(list) {
         return list[Math.round(this.random(0,list.length-1))]
     }
+
+    dirToVector(dir) {
+        let returnjson = {};
+        returnjson.xv = Math.sin(dir * (Math.PI / 180));
+        returnjson.yv = Math.cos(dir * (Math.PI / 180));
+        return returnjson;
+    }
 }

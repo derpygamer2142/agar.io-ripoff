@@ -28,7 +28,7 @@ export default class Game {
         this.camX = this.player.x;
         this.camY = this.player.y;
 
-        this.aiStates = ["follow","afk","wander","search"];//["search","afk","wander","agressive","follow"];
+        this.aiStates = ["follow","afk","wander","search", "agressive"];//["search","afk","wander","agressive","follow"];
         this.blobs = [];
         this.foodBlobs = [];
 
@@ -39,6 +39,9 @@ export default class Game {
         for (let i = 0; i < 300; i ++) {
             this.foodBlobs.push(new Food(this));
         }
+
+
+        this.gameState = 0
         
     }
 
@@ -78,4 +81,6 @@ export default class Game {
         
 
     }
+
+    
 }

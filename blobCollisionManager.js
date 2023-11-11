@@ -7,17 +7,18 @@ export default class BlobManager {
     compareBlobs(blob1, blob2) {
         if (this.game.collisions.circleCircle(blob1,blob2)) {
             if (blob1.r > blob2.r) {
-                blob1.r += blob2.r;
+                blob1.r += blob2.r*0.1;
                 blob2.deleted = true;
+                return blob1
             }
             else if (blob2.r > blob1.r) {
-                blob2.r += blob1.r;
+                blob2.r += blob1.r*0.1;
                 blob1.deleted = true;
+                return blob2
                 
             }
             else {
-                blob1.deleted = true
-                blob2.deleted = true
+                console.log("how tf")
             }
         }
 
