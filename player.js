@@ -12,6 +12,8 @@ export default class Player {
         this.xv = 0
         this.yv = 0
 
+        this.type = "player"
+
     }
 
     update() {

@@ -82,5 +82,12 @@ export default class Game {
 
     }
 
+    newBlob() {
+        this.blobs.push(new Blob(this,this.utils.randItem(this.aiStates)));
+    }
+
+    newFood() {
+        this.foodBlobs.push(new Food(this));
+    }
 
 }

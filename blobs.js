@@ -21,6 +21,7 @@ export default class Blob {
         let v = this.utils.dirToVector(this.direction)
         this.xv = v.xv;
         this.yv = v.yv;
+        this.type = "blob"
         
     }
 
@@ -226,7 +227,7 @@ export default class Blob {
     randomaAiState() {
         this.ai = this.utils.randItem(this.game.aiStates);
         while (this.ai == "afk") {
-            if (Math.random(this.utils.random(0,15))) {
+            if (Math.random(this.utils.random(0,15) == 1)) {
                 break;
             }
             else {
