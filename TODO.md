@@ -4,9 +4,9 @@ this is partially a test, partially a todo list
 
 - [ ] add camera zoom
 
-- [ ] make food respawn
+- [x] make food respawn
 
-- [ ] make ais respawn
+- [x] make ais respawn
 
 - [ ] make ai smarter
     - [ ] more ai states
