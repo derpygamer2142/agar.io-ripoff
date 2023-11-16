@@ -7,6 +7,8 @@ export default class Input {
         this.s = false;
         this.d = false;
         this.initInput();
+        this.scrollX = 0
+        this.scrollY
     }
 
     update() {
@@ -28,6 +30,16 @@ export default class Input {
 
         document.addEventListener("mousemove", e => {
             // console.log("mouse move")
+        });
+
+
+        document.addEventListener("wheel", e => {
+            if (e.deltaY > 0) {
+                this.game.camZoom *= 1.1
+            }
+            else if (e.deltaY < 0) {
+                this.game.camZoom *= 1/1.1
+            }
         });
 
 

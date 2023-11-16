@@ -111,7 +111,7 @@ export default class Blob {
                         let min = this.utils.dist(this.x,this.y,this.game.player.x,this.game.player.y)
                         let obj = this.game.player
 
-                        if (obj.r > this.r) {
+                        if (obj.r > this.r && !(obj.ai == "spikey")) {
                             min = Infinity
                             obj = null
                         }
@@ -141,15 +141,20 @@ export default class Blob {
                         console.log("no blobs")
                         break;
                     }
+
+                case "spikey":
+                    this.color == "rgb(19,252,3)"
+                    break;
             
+            }
+                if (!(this.ai == "spikey")) {
+                    let rand = Math.round(this.utils.random(0,1000))
+                    if (rand == 1) {
+                        this.randomaAiState()
+                    }
                 }
 
-                let rand = Math.round(this.utils.random(0,1000))
-                if (rand == 1) {
-                    this.randomaAiState()
-                }
-
-                this.game.blobManager.compareBlobs(this,this.game.player);
+                //this.game.blobManager.compareBlobs(this,this.game.player);
                 
                 
                 /*
@@ -178,7 +183,7 @@ export default class Blob {
                             
                             //this.game.blobManager.compareBlobs(this,b2);
                             if (this.collisions.circleCircle(this,b2)) {
-                                console.log("bonk")
+                                //console.log("bonk")
                                 if (this.r > b2.r) {
                                     this.r += b2.r*0.1
                                     b2.deleted = true;
@@ -212,12 +217,12 @@ export default class Blob {
         if (!this.deleted) {
             ctx.fillStyle = this.color;
             ctx.beginPath();
-            let calcX = (this.game.camX - this.x)*this.game.camZoom;
-            let calcY = (this.game.camY - this.y)*this.game.camZoom;
+            let calcX = (this.game.camX - this.x*this.game.camZoom);
+            let calcY = (this.game.camY - this.y*this.game.camZoom);
             ctx.arc(calcX, calcY, this.r*this.game.camZoom, 0, Math.PI * 2, false);
             ctx.fill();
             ctx.fillStyle = "black";
-            ctx.font = "12px comic sans"
+            ctx.font = `${12*this.game.camZoom}px comic sans`
             ctx.fillText(this.ai,calcX,calcY)
         }
 
@@ -225,14 +230,16 @@ export default class Blob {
     }
 
     randomaAiState() {
+        if (this.ai == "spikey") {return;}
         this.ai = this.utils.randItem(this.game.aiStates);
-        while (this.ai == "afk") {
-            if (Math.random(this.utils.random(0,15) == 1)) {
-                break;
+            while (this.ai == "afk") {
+                if (Math.random(this.utils.random(0,15) == 1)) {
+                    break;
+                }
+                else {
+                    this.ai = this.utils.randItem(this.game.aiStates);
+                }
             }
-            else {
-                this.ai = this.utils.randItem(this.game.aiStates);
-            }
-        }
+
     }
 }

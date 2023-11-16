@@ -15,3 +15,5 @@ this is partially a test, partially a todo list
 - [ ] make movement be based on mouse movement
 
 - [ ] balance movement speed
+
+- [ ] green things

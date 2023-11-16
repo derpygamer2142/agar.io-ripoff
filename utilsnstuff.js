@@ -17,4 +17,15 @@ export default class Utils {
         returnjson.yv = Math.cos(dir * (Math.PI / 180));
         return returnjson;
     }
+
+    chooseWithWeights(data) {
+        let weights = {}
+        let total = 0
+        Object.keys(data).forEach(e =>{
+            total += data[e].w
+        });
+        Object.keys(data).forEach(e =>{
+            weights[e] = (data[e].w/total)
+        });
+    }
 }

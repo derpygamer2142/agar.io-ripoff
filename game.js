@@ -29,7 +29,7 @@ export default class Game {
         this.camY = this.player.y;
         this.camZoom = 1
 
-        this.aiStates = ["follow","afk","wander","search", "agressive"];
+        this.aiStates = ["follow","afk","wander","search", "agressive","spikey"];
         this.blobs = [];
         this.foodBlobs = [];
 
@@ -49,7 +49,7 @@ export default class Game {
     update() {
         this.grid.update();
         this.player.update();
-        this.camZoom = 1 //25/this.player.r
+        // this.camZoom = 25/this.player.r
         this.camX = this.player.x + this.gameWidth/2;
         this.camY = this.player.y + this.gameHeight/2;
 
@@ -64,6 +64,7 @@ export default class Game {
         // this.blobManager.checkForBlobCollisions();
         this.blobs = this.blobs.filter(b => !b.deleted);
         this.foodBlobs = this.foodBlobs.filter(b => !b.deleted);
+        //console.log(this.foodBlobs.length)
     }
 
     draw(ctx) {
