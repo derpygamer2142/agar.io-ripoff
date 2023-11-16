@@ -23,7 +23,9 @@ export default class Grid {
             for (let y = 0; y < this.gridSize; y++) {
                 let calcX = this.game.camX - this.x + (x * this.squareSize) //this.x - this.game.camX + (x * this.squareSize)
                 let calcY =  this.game.camY - this.y + (y * this.squareSize)
-                ctx.strokeRect(calcX, calcY,this.squareSize,this.squareSize) // (y*this.squareSize)
+                calcX *= this.game.camZoom
+                calcY *= this.game.camZoom
+                ctx.strokeRect(calcX, calcY,this.squareSize*this.game.camZoom,this.squareSize*this.game.camZoom) // (y*this.squareSize)
             }
         }
     }

@@ -49,10 +49,10 @@ export default class Player {
     draw(ctx) {
         ctx.fillStyle = "blue";
         ctx.beginPath();
-        let calcX = this.game.camX - this.x// + this.game.gameWidth/2
-        let calcY = this.game.camY - this.y// + this.game.gameHeight/2
+        let calcX = (this.game.camX - this.x)*this.game.camZoom
+        let calcY = (this.game.camY - this.y)*this.game.camZoom
         
-        ctx.arc(calcX, calcY, this.r, 0, Math.PI * 2, false);
+        ctx.arc(calcX, calcY, this.r*this.game.camZoom, 0, Math.PI * 2, false);
         ctx.fill();
     }
 
