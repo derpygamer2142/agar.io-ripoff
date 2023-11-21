@@ -82,10 +82,10 @@ export default class Blob {
                         this.randomaAiState()
                     }
                     
-                break;
+                    break;
                 
                 case "follow":
-                    this.color = "red"
+                    this.color = "aqua"
                     if (this.utils.dist(this.x,this.y,this.targetX,this.targetY) <= 15) {
                         if (Math.round(Math.random * 5) == 1) {
                             this.targetX = this.x + ((Math.random()-0.5) * 2000);
@@ -139,14 +139,21 @@ export default class Blob {
                     else {
                         this.randomaAiState()
                         console.log("no blobs")
-                        break;
+                        
                     }
+                    break;
+
 
                 case "spikey":
-                    this.color == "rgb(19,252,3)"
+                    this.color = "rgb(19,252,3)"
+                    this.xv = 0
+                    this.yv = 0
                     break;
-            
+                
             }
+
+
+
                 if (!(this.ai == "spikey")) {
                     let rand = Math.round(this.utils.random(0,1000))
                     if (rand == 1) {
@@ -234,12 +241,13 @@ export default class Blob {
     randomaAiState() {
         if (this.ai == "spikey") {return;}
         this.ai = this.utils.randItem(this.game.aiStates);
-            while (this.ai == "afk") {
-                if (Math.random(this.utils.random(0,15) == 1)) {
+            while (this.ai == "afk" || this.ai == "spikey") {
+                if (Math.random(this.utils.random(0,15) == 1 && !(this.ai == "spikey"))) {
                     break;
                 }
                 else {
                     this.ai = this.utils.randItem(this.game.aiStates);
+
                 }
             }
 
