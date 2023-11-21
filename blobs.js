@@ -9,8 +9,8 @@ export default class Blob {
         this.y = (Math.random() - 0.5) * 8000;
         this.r = 17.5 + (Math.random() * 65);
 
-        this.targetX = this.x + ((Math.random()-0.5) * 2000);
-        this.targetY = this.y + ((Math.random()-0.5) * 2000);
+        this.targetX = this.x + ((Math.random()-0.5) * this.game.spawnDist);
+        this.targetY = this.y + ((Math.random()-0.5) * this.game.spawnDist);
 
         this.color = "red";
         this.ai = ai;
@@ -154,7 +154,7 @@ export default class Blob {
                     }
                 }
 
-                //this.game.blobManager.compareBlobs(this,this.game.player);
+                this.game.blobManager.compareBlobs(this,this.game.player);
                 
                 
                 /*

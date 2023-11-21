@@ -40,6 +40,14 @@ export default class Input {
             else if (e.deltaY < 0) {
                 this.game.camZoom *= 1.1
             }
+            console.log(3 * (this.game.player.r/25))
+
+            if (this.game.camZoom <= 1/(this.game.player.r/25)) {
+                this.game.camZoom = 1/(this.game.player.r/25)
+            }
+            else if (this.game.camZoom >= 2) {
+                this.game.camZoom = 2
+            }
         });
 
 

@@ -5,7 +5,7 @@ export default class Grid {
 
         // note: top left
 
-        this.gridSize = 85;
+        this.gridSize = 125;
         this.squareSize = 85;
         this.gridWidth = this.gridSize * this.squareSize;
 

@@ -12,6 +12,7 @@ export default class Game {
         this.gameWidth = WIDTH;
         this.gameHeight = HEIGHT;
 
+
         this.camX = 0;
         this.camY = 0;
 
@@ -21,6 +22,7 @@ export default class Game {
         this.blobManager = new BlobManager(this);
 
         this.grid = new Grid(this);
+        this.spawnDist = this.grid.gridWidth
         this.input = new Input(this);
         this.player = new Player(this);
 
@@ -35,7 +37,7 @@ export default class Game {
         this.blobs = [];
         this.foodBlobs = [];
 
-        for (let i = 0; i < 400; i ++) {
+        for (let i = 0; i < 200; i ++) {
             this.blobs.push(new Blob(this,this.utils.randItem(this.aiStates))); // 
         }
 
