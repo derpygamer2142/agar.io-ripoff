@@ -50,8 +50,8 @@ export default class Game {
         this.grid.update();
         this.player.update();
         // this.camZoom = 25/this.player.r
-        this.camX = this.player.x + this.gameWidth/2;
-        this.camY = this.player.y + this.gameHeight/2;
+        this.camX = this.player.x// + this.gameWidth/2;
+        this.camY = this.player.y// + this.gameHeight/2;
 
         this.blobs.forEach(blob => {
             blob.update();

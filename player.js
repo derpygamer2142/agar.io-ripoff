@@ -51,8 +51,8 @@ export default class Player {
     draw(ctx) {
         ctx.fillStyle = "blue";
         ctx.beginPath();
-        let calcX = (this.game.camX - this.x*this.game.camZoom)
-        let calcY = (this.game.camY - this.y*this.game.camZoom)
+        let calcX = (this.game.camX - this.x)*this.game.camZoom
+        let calcY = (this.game.camY - this.y)*this.game.camZoom
         //console.log(`${calcX-this.calcX}, ${calcY-this.calcY}`)
         this.calcX = calcX
         this.calcY = calcY

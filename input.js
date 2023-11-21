@@ -35,10 +35,10 @@ export default class Input {
 
         document.addEventListener("wheel", e => {
             if (e.deltaY > 0) {
-                this.game.camZoom *= 1.1
+                this.game.camZoom *= 1/1.1
             }
             else if (e.deltaY < 0) {
-                this.game.camZoom *= 1/1.1
+                this.game.camZoom *= 1.1
             }
         });
 
