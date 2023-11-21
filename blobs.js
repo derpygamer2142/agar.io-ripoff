@@ -217,8 +217,10 @@ export default class Blob {
         if (!this.deleted) {
             ctx.fillStyle = this.color;
             ctx.beginPath();
-            let calcX = (this.game.camX - this.x*this.game.camZoom);
-            let calcY = (this.game.camY - this.y*this.game.camZoom);
+            let calcX = (this.game.camX - this.x)*this.game.camZoom;
+            let calcY = (this.game.camY - this.y)*this.game.camZoom;
+            calcX += this.game.camXOff
+            calcY += this.game.camYOff
             ctx.arc(calcX, calcY, this.r*this.game.camZoom, 0, Math.PI * 2, false);
             ctx.fill();
             ctx.fillStyle = "black";

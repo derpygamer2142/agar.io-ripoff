@@ -27,6 +27,8 @@ export default class Game {
 
         this.camX = this.player.x;
         this.camY = this.player.y;
+        this.camXOff = this.gameWidth/2
+        this.camYOff = this.gameHeight/2
         this.camZoom = 1
 
         this.aiStates = ["follow","afk","wander","search", "agressive","spikey"];
@@ -50,8 +52,10 @@ export default class Game {
         this.grid.update();
         this.player.update();
         // this.camZoom = 25/this.player.r
-        this.camX = this.player.x// + this.gameWidth/2;
-        this.camY = this.player.y// + this.gameHeight/2;
+        this.camX = this.player.x
+        this.camY = this.player.y
+        this.camXOff = this.gameWidth/2
+        this.camYOff = this.gameHeight/2
 
         this.blobs.forEach(blob => {
             blob.update();
