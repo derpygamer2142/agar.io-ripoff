@@ -127,6 +127,7 @@ export default class Blob {
                             }
                         });
 
+                        if (obj == null) {break;}
                         let calcX = obj.x - this.x;
                         let calcY = obj.y - this.y;
                         this.direction = (Math.atan2(calcX,calcY) * (180/Math.PI))
@@ -149,12 +150,36 @@ export default class Blob {
                     this.xv = 0
                     this.yv = 0
                     break;
+
+                case "afraid":
+                    console.log("afraid enemy")
+                    if (this.game.blobs.length > 0) {
+                        let obj = this.afraidCheck();
+                        if (obj == null) {
+                            this.randomaAiState()
+                            break;
+                        }
+                        
+                        let calcX = obj.x - this.x;
+                        let calcY = obj.y - this.y;
+                        this.direction = (Math.atan2(calcX,calcY) * (180/Math.PI))
+        
+                        let v = this.utils.dirToVector(this.direction+180)
+                        this.xv = v.xv;
+                        this.yv = v.yv;
+
+                    }
+                    else {
+                        this.randomaAiState()
+                        console.log("no blobs")
+                    }
                 
             }
 
 
 
                 if (!(this.ai == "spikey")) {
+                    this.afraidCheck();
                     let rand = Math.round(this.utils.random(0,1000))
                     if (rand == 1) {
                         this.randomaAiState()
@@ -233,7 +258,7 @@ export default class Blob {
             ctx.arc(calcX, calcY, this.r*this.game.camZoom, 0, Math.PI * 2, false);
             ctx.fill();
             ctx.fillStyle = "black";
-            ctx.font = `${12*this.game.camZoom}px comic sans`
+            ctx.font = `${12*this.game.camZoom}px Comic Sans MS`
             ctx.fillText(this.ai,calcX,calcY)
         }
 
@@ -254,4 +279,27 @@ export default class Blob {
             }
 
     }
+
+    afraidCheck() {
+        let dangerous = []
+        this.game.blobs.forEach(b => {
+            if (this.utils.dist(this.x,this.y,b.x,b.y) <= 100+b.r && b.r > this.r) {dangerous.push(b)}
+        });
+        if (this.utils.dist(this.x,this.y,this.game.player.x,this.game.player.y) <= 100+this.game.player.r && this.game.player.r > this.r) {dangerous.push(this.game.player)}
+
+        let obj = null;
+        let heldDist = Infinity;
+        if (dangerous.length < 1) {return null}
+        this.ai = "afraid"
+
+        dangerous.forEach(b => {
+            let heldHeldDist = this.utils.dist(this.x,this.y,b.x,b.y)
+            if (heldDist >= heldHeldDist) {
+                obj = b
+                heldDist = heldHeldDist
+            }
+        });
+
+        return obj;
+        }
 }

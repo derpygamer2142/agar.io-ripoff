@@ -1,10 +1,9 @@
-this is partially a test, partially a todo list
+this is a todo list
 
 
 
-- [ ] add camera zoom
+- [x] add camera zoom
 
-camera zoom is centered in the top left corner, issues happen when offsetting the camera
 
 - [x] make food respawn
 
@@ -12,10 +11,10 @@ camera zoom is centered in the top left corner, issues happen when offsetting th
 
 - [ ] make ai smarter
     - [ ] more ai states
-    - [ ] have ais run away from other people
+    - [x] have ais run away from other people
 
 - [ ] make movement be based on mouse movement
 
 - [ ] balance movement speed
 
-- [ ] green things
+- [x] green things

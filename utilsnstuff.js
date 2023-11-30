@@ -27,5 +27,11 @@ export default class Utils {
         Object.keys(data).forEach(e =>{
             weights[e] = (data[e].w/total)
         });
+        let randval = Math.random()
+        let heldAmount = 0;
+        let heldOutput = null
+        Object.keys(weights).forEach(k => {
+            
+        })
     }
 }

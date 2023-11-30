@@ -12,7 +12,7 @@ export default class Game {
         this.gameWidth = WIDTH;
         this.gameHeight = HEIGHT;
 
-
+        
         this.camX = 0;
         this.camY = 0;
 
@@ -44,10 +44,6 @@ export default class Game {
         for (let i = 0; i < 3500; i ++) {
             this.foodBlobs.push(new Food(this));
         }
-
-
-        this.gameState = 0
-        
     }
 
     update() {
@@ -77,7 +73,7 @@ export default class Game {
         this.grid.draw(ctx);
         this.player.draw(ctx);
         this.blobs.sort((a,b) => a.r - b.r)
-        //this.foodBlobs.sort((a,b) => a.r - b.r) why tf does this break everything
+        this.foodBlobs.sort((a,b) => a.r - b.r) //why tf does this break everything
 
 
         this.foodBlobs.forEach(f => {
@@ -98,6 +94,12 @@ export default class Game {
 
     newFood() {
         this.foodBlobs.push(new Food(this));
+    }
+
+    start(name) {
+
+        this.gameState = 0
+        this.player.name = name
     }
 
 }
