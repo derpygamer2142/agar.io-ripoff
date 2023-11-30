@@ -76,6 +76,8 @@ export default class Game {
     draw(ctx) {
         this.grid.draw(ctx);
         this.player.draw(ctx);
+        this.blobs.sort((a,b) => a.r - b.r)
+        //this.foodBlobs.sort((a,b) => a.r - b.r) why tf does this break everything
 
 
         this.foodBlobs.forEach(f => {
