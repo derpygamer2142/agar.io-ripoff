@@ -188,7 +188,19 @@ export default class Blob {
                     this.game.blobs.forEach(b2 => {
                         if (!(b2 == this)) {
                             
-                            this.game.blobManager.compareBlobs(this,b2);
+                            //this.game.blobManager.compareBlobs(this,b2);
+                            if (this.collisions.circleCircle(this,b2)) {
+                                //console.log("bonk")
+                                if (this.r > b2.r) {
+                                    this.r += b2.r*0.1
+                                    b2.deleted = true;
+                                }
+                                else {
+                                    b2.r += b2.r*0.1
+                                    this.deleted = true;
+                                }
+                            }
+                            
                         }
                     });
 
