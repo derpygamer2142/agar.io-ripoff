@@ -15,6 +15,7 @@ export default class Food {
 
         this.deleted = false;
         this.type = "food"
+        this.ai = "food"
     }
 
     update() {

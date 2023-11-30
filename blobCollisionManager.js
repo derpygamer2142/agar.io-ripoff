@@ -13,13 +13,26 @@ export default class BlobManager {
                 this.game.newBlob()
             }
             if (blob1.r > blob2.r) {
+                if (blob2.ai == "spikey") {
+                    blob1.deleted = true
+                    return blob2
+                }
+                else if (blob1.ai == "spikey") {return blob1;}
+
                 blob1.r += blob2.r*0.1;
                 blob2.deleted = true;
                 //console.log(blob1.type,blob2.type)
                 
                 return blob1
+                
             }
             else if (blob2.r > blob1.r) {
+                if (blob1.ai == "spikey") {
+                    blob2.deleted = true
+                    return blob1
+                }
+                else if (blob2.ai == "spikey") {return blob2;} // i'm not 100% sure if this will work, I can't remember what it does
+            
                 blob2.r += blob1.r*0.1;
                 blob1.deleted = true;
                 //console.log(blob1.type,blob2.type)
