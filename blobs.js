@@ -116,8 +116,8 @@ export default class Blob {
                             obj = null
                         }
                         let possibleTargets = this.game.blobs;
-                        possibleTargets = possibleTargets.filter(f => (f.r < this.r))
-                        this.game.blobs.forEach(f => {
+                        possibleTargets = possibleTargets.filter(f => (f.r < this.r) && !(f.ai == "spikey"))
+                        possibleTargets.forEach(f => {
                             if (!(f == this)) {
                                 let dist = this.utils.dist(this.x,this.y,f.x,f.y);
                                 if (dist <= min) {

@@ -6,30 +6,52 @@ export default class BlobManager {
 
     compareBlobs(blob1, blob2) {
         if (this.game.collisions.circleCircle(blob1,blob2)) {
-            if (blob1.type == "food" || blob2.type == "food") {
-                this.game.newFood()
+            if ((blob1.ai == "spikey" || blob2.ai == "spikey") && !(blob1.type == "food" || blob2.type == "food")) {
+                if (blob1.ai == "spikey" && blob2.ai == "spikey") {return;}
+
+                if (blob1.ai == "spikey") {
+                    if (blob1.r < blob2.r) {
+                        blob2.deleted = true;
+                        return blob1;
+                    }
+                    
+                }
+
+                else {
+                    if (blob2.r < blob1.r) {
+                        blob1.deleted = true; // i can't remember what this does but just in case i'm keeping it in
+                        return blob2;
+                    }
+                }
+
             }
-            if (blob1.type == "blob" || blob2.type == "blob") {
-                this.game.newBlob()
-            }
-            if (blob1.r > blob2.r) {
-                blob1.r += blob2.r*0.1;
-                blob2.deleted = true;
-                //console.log(blob1.type,blob2.type)
-                
-                return blob1
-            }
-            else if (blob2.r > blob1.r) {
-                blob2.r += blob1.r*0.1;
-                blob1.deleted = true;
-                //console.log(blob1.type,blob2.type)
-                
-                
-                return blob2
-                
-            }
+
             else {
-                console.log("how tf")
+                if (blob1.type == "food" || blob2.type == "food") {
+                    this.game.newFood()
+                }
+                if (blob1.type == "blob" || blob2.type == "blob") {
+                    this.game.newBlob()
+                }
+                if (blob1.r > blob2.r) {
+                    blob1.r += blob2.r*0.1;
+                    blob2.deleted = true;
+                    //console.log(blob1.type,blob2.type)
+                    
+                    return blob1
+                }
+                else if (blob2.r > blob1.r) {
+                    blob2.r += blob1.r*0.1;
+                    blob1.deleted = true;
+                    //console.log(blob1.type,blob2.type)
+                    
+                    
+                    return blob2
+                    
+                }
+                else {
+                    console.log("how tf")
+                }
             }
             
         }
