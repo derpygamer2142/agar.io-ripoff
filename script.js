@@ -1,9 +1,5 @@
 import Game from "./game.js";
 
-/*
-wow such an amazing test
-*/
-
 const canv = document.querySelector("canvas");
 const form = document.querySelector("form")
 const ctx = canv.getContext("2d");
@@ -32,8 +28,20 @@ function start(e) {
 form.onsubmit = start
 
 
-/*
-const nameInput = document.createElement("input");
+
+
+
+function runGame() {
+    if (game.gameState == 0) {
+        ctx.clearRect(0,0,WIDTH,HEIGHT);
+        ctx.fillStyle = "rgb(60,60,60)";
+        ctx.fillRect(0,0,WIDTH,HEIGHT);
+
+        game.update();
+        game.draw(ctx);
+    }
+    else if (game.gameState == 1) {
+        const nameInput = document.createElement("input");
         nameInput.setAttribute("id", "nameInput");
         nameInput.setAttribute("type", "text");
         nameInput.required = true;
@@ -48,20 +56,9 @@ const nameInput = document.createElement("input");
         form.appendChild(enterNameHeader);
         form.appendChild(nameInput);
         form.appendChild(startBtn);
-*/
-
-
-function runGame() {
-    if (game.gameState == 0) {
-        ctx.clearRect(0,0,WIDTH,HEIGHT);
-        ctx.fillStyle = "rgb(60,60,60)";
-        ctx.fillRect(0,0,WIDTH,HEIGHT);
-
-        game.update();
-        game.draw(ctx);
-    }
-    else if (game.gameState == 1) {
-        //game = new Game(WIDTH,HEIGHT)
+        canv.width = 0
+        canv.height = 0
+        game = new Game(WIDTH,HEIGHT)
     }
 }
 
