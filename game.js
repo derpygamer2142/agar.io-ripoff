@@ -34,6 +34,7 @@ export default class Game {
         this.camZoom = 1
 
         this.aiStates = ["follow","afk","wander","search", "agressive","spikey"];
+        this.rerolledAiStates = ["follow","afk","wander","search", "agressive"];
         this.blobs = [];
         this.foodBlobs = [];
 

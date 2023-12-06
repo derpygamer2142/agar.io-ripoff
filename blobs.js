@@ -267,13 +267,13 @@ export default class Blob {
 
     randomaAiState() {
         if (this.ai == "spikey") {return;}
-        this.ai = this.utils.randItem(this.game.aiStates);
-            while (this.ai == "afk" || this.ai == "spikey") {
-                if (Math.random(this.utils.random(0,15) == 1 && !(this.ai == "spikey"))) {
+        this.ai = this.utils.randItem(this.game.rerolledAiStates);
+            while (this.ai == "afk") {
+                if (Math.random(this.utils.random(0,15) == 1)) {
                     break;
                 }
                 else {
-                    this.ai = this.utils.randItem(this.game.aiStates);
+                    this.ai = this.utils.randItem(this.game.rerolledAiStates);
 
                 }
             }
@@ -281,25 +281,27 @@ export default class Blob {
     }
 
     afraidCheck() {
-        let dangerous = []
-        this.game.blobs.forEach(b => {
-            if (this.utils.dist(this.x,this.y,b.x,b.y) <= 100+b.r && b.r > this.r) {dangerous.push(b)}
-        });
-        if (this.utils.dist(this.x,this.y,this.game.player.x,this.game.player.y) <= 100+this.game.player.r && this.game.player.r > this.r) {dangerous.push(this.game.player)}
+        if (!this.ai == "afk") { // afk people can't be afraid ¯\_(ツ)_/¯
+            let dangerous = []
+            this.game.blobs.forEach(b => {
+                if (this.utils.dist(this.x,this.y,b.x,b.y) <= 100+b.r && b.r > this.r) {dangerous.push(b)}
+            });
+            if (this.utils.dist(this.x,this.y,this.game.player.x,this.game.player.y) <= 100+this.game.player.r && this.game.player.r > this.r) {dangerous.push(this.game.player)}
 
-        let obj = null;
-        let heldDist = Infinity;
-        if (dangerous.length < 1) {return null}
-        this.ai = "afraid"
+            let obj = null;
+            let heldDist = Infinity;
+            if (dangerous.length < 1) {return null}
+            this.ai = "afraid"
 
-        dangerous.forEach(b => {
-            let heldHeldDist = this.utils.dist(this.x,this.y,b.x,b.y)
-            if (heldDist >= heldHeldDist) {
-                obj = b
-                heldDist = heldHeldDist
+            dangerous.forEach(b => {
+                let heldHeldDist = this.utils.dist(this.x,this.y,b.x,b.y)
+                if (heldDist >= heldHeldDist) {
+                    obj = b
+                    heldDist = heldHeldDist
+                }
+            });
+
+            return obj;
             }
-        });
-
-        return obj;
         }
 }
