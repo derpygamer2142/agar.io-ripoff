@@ -1,5 +1,7 @@
+import Usernames from "./usernameGenerator.js"
 export default class Blob {
     constructor(game,ai) {
+
         this.game = game;
 
         this.collisions = this.game.collisions;
@@ -22,6 +24,12 @@ export default class Blob {
         this.xv = v.xv;
         this.yv = v.yv;
         this.type = "blob"
+
+        this.name = null;
+        let e = new Usernames(this.game)
+        if (!(ai == "spikey")) {
+            this.name = e.randName()
+        }
         
     }
 
@@ -260,7 +268,7 @@ export default class Blob {
             ctx.fillStyle = "black";
             ctx.font = `${12*this.game.camZoom}px Comic Sans MS`
             ctx.textAlign = "center"
-            ctx.fillText(this.ai,calcX,calcY)
+            ctx.fillText(this.name,calcX,calcY)
         }
 
 

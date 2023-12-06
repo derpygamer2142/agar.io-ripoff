@@ -63,9 +63,11 @@ export default class Player {
         
         ctx.arc(calcX, calcY, this.r*this.game.camZoom, 0, Math.PI * 2, false);
         ctx.fill();
-        ctx.fillStyle = "black";
-        ctx.font = `${12*this.game.camZoom}px Comic Sans MS`
-        ctx.fillText(this.name,calcX,calcY)
+        if (!this.ai == "spikey") {
+            ctx.fillStyle = "black";
+            ctx.font = `${12*this.game.camZoom}px Comic Sans MS`
+            ctx.fillText(this.name,calcX,calcY)
+        }
     }
 
 }
