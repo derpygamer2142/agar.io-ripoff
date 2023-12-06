@@ -259,6 +259,7 @@ export default class Blob {
             ctx.fill();
             ctx.fillStyle = "black";
             ctx.font = `${12*this.game.camZoom}px Comic Sans MS`
+            ctx.textAlign = "center"
             ctx.fillText(this.ai,calcX,calcY)
         }
 
